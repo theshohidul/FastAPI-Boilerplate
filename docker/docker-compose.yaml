@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  app:
+    container_name: PYTHON_APP
+    env_file:
+      - .env
+    build: 
+      context: ./../app
+      dockerfile: ./../docker/conf/python/Dockerfile
+    ports: 
+      - "8080:8080"
+    volumes:
+      - ./../app:/app:rw
+    command: sh -c "
+            chmod +x ./wait-for-it.sh 
+            && ./wait-for-it.sh -t 0 mysql:3306
+            && uvicorn main:app --reload --host 0.0.0.0 --port 8080
+            "
+    depends_on:
+      - mysql
+
+  mysql:
+    platform: linux/x86_64
+    image: mysql:8.0.27
+    container_name: MYSQL_DB
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    ports:
+      - 3307:3306
+    volumes:
+      - ./data/mysql:/var/lib/mysql
