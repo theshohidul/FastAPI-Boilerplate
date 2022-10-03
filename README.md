@@ -1,7 +1,7 @@
 
 # FastAPI Boilerplate
 
-A dockerized FastAPI Boilerplate with JWT, Loguru logging, Role based authorization, SQLAlchemy ORM with AsyncSession.
+A dockerized FastAPI Boilerplate with JWT, Loguru logging middleware, Role based authorization, SQLAlchemy ORM with AsyncSession.
 
 Some endpoints are added as demo purpose, like: auth, register and login.
 
