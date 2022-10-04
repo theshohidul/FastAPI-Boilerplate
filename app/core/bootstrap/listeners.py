@@ -6,8 +6,6 @@ def init_listeners(app_: FastAPI) -> None:
     @app_.on_event("startup")
     async def startup():
         await database.init()
-        await database.create_all()
-
         print("Database connected")
 
     @app_.on_event("shutdown")
