@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    container_name: PYTHON_APP
+    container_name: PYTHON_APP_DOCKER
     env_file:
       - .env
     build: 
@@ -23,7 +23,7 @@ services:
   mysql:
     platform: linux/x86_64
     image: mysql:8.0.27
-    container_name: MYSQL_DB
+    container_name: MYSQL_DB_DOCKER
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
