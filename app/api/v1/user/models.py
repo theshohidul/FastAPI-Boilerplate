@@ -16,6 +16,9 @@ user_roles_table = Table(
 
 
 class RoleModel(Base):
+    def __init__(self):
+        pass
+
     __tablename__ = "roles"
 
     id: int = Column(Integer, primary_key=True, autoincrement=True)
@@ -28,6 +31,9 @@ class RoleModel(Base):
 
 
 class UserModel(Base):
+    def __init__(self):
+        pass
+
     __tablename__ = "users"
 
     id: int = Column(Integer, primary_key=True, autoincrement=True)

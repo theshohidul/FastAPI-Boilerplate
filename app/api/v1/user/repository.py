@@ -4,7 +4,7 @@ from sqlalchemy import select, insert
 from sqlalchemy.orm import joinedload, lazyload, contains_eager
 
 from core.db.db import database
-from .models import UserModel
+from .models import UserModel, RoleModel, user_roles_table
 from .schemas.requests import UserCreateSchema
 
 
@@ -13,8 +13,22 @@ class UserRepository:
         self.db = db
 
     async def create_user(self, user: UserCreateSchema):
-        query = insert(UserModel).values(**user.dict())
-        await self.db.execute(query)
+        await self.db.rollback()
+
+        user_dict = user.dict()
+        role_name = user.role
+        del user_dict["role"]
+
+        query = insert(UserModel).values(**user_dict)
+        user = await self.db.execute(query)
+
+        query = select(RoleModel).where(RoleModel.role == role_name)
+        role = await self.db.execute(query)
+        role = role.scalars().first()
+        if role:
+            query = insert(user_roles_table).values({'role_id': role.id, 'user_id': user.inserted_primary_key[0]})
+            await self.db.execute(query)
+
         return await self.db.commit()
 
     async def get_user_by_email(self, email: str):

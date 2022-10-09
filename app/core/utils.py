@@ -1,7 +1,7 @@
 import bcrypt
+from fastapi.responses import JSONResponse
 from starlette.requests import Request
 from starlette.routing import Match
-from fastapi.responses import JSONResponse
 
 from core.configs import get_settings
 from core.schemas.base import BaseResponse
@@ -48,11 +48,10 @@ def hash_password(password):
     )
 
 
-def make_response_from_model(model: BaseResponse):
+def base_response_to_json_response(model: BaseResponse):
     try:
         status_code = model.status_code
         content = model.dict()
-        content.pop("status_code")
 
         return JSONResponse(
             status_code=status_code,

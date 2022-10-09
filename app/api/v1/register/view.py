@@ -1,7 +1,7 @@
 from api.v1.register.service import RegisterService
+from core.utils import base_response_to_json_response
 from .schemas.requests import RegisterRequest
 from .schemas.responses import UserRegisteredSuccessfully
-from core.utils import make_response_from_model
 
 
 class RegisterView:
@@ -14,4 +14,4 @@ class RegisterView:
         except Exception as exc:
             print(exc)
             raise
-        return make_response_from_model(UserRegisteredSuccessfully())
+        return base_response_to_json_response(UserRegisteredSuccessfully())

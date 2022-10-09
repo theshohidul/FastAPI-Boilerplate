@@ -23,6 +23,9 @@ def init_handlers(app_: FastAPI) -> None:
     @app_.exception_handler(RequestValidationError)
     async def validation_exception_handler(request: Request, exc: RequestValidationError):
         reformatted_message = defaultdict(list)
+        field_string = ''
+        msg = ''
+
         for pydantic_error in exc.errors():
             loc, msg, error_type = pydantic_error["loc"], pydantic_error["msg"], pydantic_error["type"]
 
@@ -34,7 +37,7 @@ def init_handlers(app_: FastAPI) -> None:
             reformatted_message[field_string].append(msg)
 
         return JSONResponse(
-            status_code=UnprocessableEntity.status_code,
+            status_code=UnprocessableEntity().status_code,
             content={
                 "status": UnprocessableEntity.status,
                 "status_type": UnprocessableEntity.status_type,

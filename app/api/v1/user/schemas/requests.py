@@ -6,3 +6,4 @@ class UserCreateSchema(BaseModel):
     email: EmailStr
     phone: str
     password: str
+    role: str

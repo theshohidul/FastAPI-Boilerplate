@@ -25,7 +25,6 @@ class AuthService:
 
     async def access(self, login_request: LoginRequest):
         user: UserModel = await self.user_repository.get_user_by_email(login_request.email)
-        print(user.name)
         if not user:
             raise UserNotFoundException
 

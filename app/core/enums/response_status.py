@@ -9,3 +9,5 @@ class ResponseStatus(Enum):
 
     USER_REGISTERED = (HTTPStatus.CREATED, 'User registered successfully')
     USER_LOGGED_IN = (HTTPStatus.OK, 'User logged in successfully')
+    USER_NOT_FOUND = (HTTPStatus.NOT_FOUND, 'User not found')
+    DUPLICATE_EMAIL = (HTTPStatus.CONFLICT, "User already exists")

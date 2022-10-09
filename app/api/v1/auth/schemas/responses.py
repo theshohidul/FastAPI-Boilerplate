@@ -21,7 +21,7 @@ class TokenPayload(BaseModel):
 
 class TokenResponse(BaseResponse):
     status: int = StatusType.SUCCESS.value
-    status_code: str = ResponseStatus.USER_LOGGED_IN.status_code
     status_type: str = ResponseStatus.USER_LOGGED_IN.name
     message: str = ResponseStatus.USER_LOGGED_IN.message
     data: TokenData
+    _status_code: str = ResponseStatus.USER_LOGGED_IN.status_code
