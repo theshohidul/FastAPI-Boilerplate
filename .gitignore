@@ -2,5 +2,4 @@ docker/data
 __pycache__
 .idea
 .DS_Store
-app/.DS_Store
-docker/.DS_Store
+**/.DS_Store
