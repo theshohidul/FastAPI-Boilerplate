@@ -1,8 +1,7 @@
-import os
-import secrets
-from typing import List
-from pydantic import BaseSettings, validator
 from functools import lru_cache
+from typing import List
+
+from pydantic import BaseSettings, validator
 
 
 class Settings(BaseSettings):

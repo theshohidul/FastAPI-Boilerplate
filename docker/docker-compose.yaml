@@ -12,13 +12,14 @@ services:
       - "8080:8080"
     volumes:
       - ./../app:/app:rw
-    command: sh -c "
-            chmod +x ./wait-for-it.sh 
+    command: sh -c "cd /app && poetry config virtualenvs.in-project true && poetry install
+            && chmod +x ./wait-for-it.sh 
             && ./wait-for-it.sh -t 0 mysql:3306
-            && uvicorn main:app --reload --host 0.0.0.0 --port 8080
-            "
+            && /app/.venv/bin/uvicorn main:app --reload --host 0.0.0.0 --port 8080"
     depends_on:
       - mysql
+    networks:
+      - fastapi_app_network
 
   mysql:
     platform: linux/x86_64
@@ -34,3 +35,9 @@ services:
       - 3307:3306
     volumes:
       - ./data/mysql:/var/lib/mysql
+    networks:
+      - fastapi_app_network
+
+networks:
+  fastapi_app_network:
+    driver: bridge
