@@ -8,18 +8,19 @@ Some endpoints are added as demo purpose, like: auth, register and login.
 
 ## Dependencies
 In this project [poetry](https://python-poetry.org/) is used as package dependency manager. Below python packages are used in this project.
- 
-- python = "^3.9"
-- uvicorn = {version = "0.17.6", extras = ["standard"]}
-- fastapi = {version = "0.80.0", extras = ["all"]}
-- json-log-formatter = "0.4.0" 
-- SQLAlchemy = "^1.4.40"
-- alembic = "^1.8.1"
-- databases = {extras = ["aiomysql"], version = "^0.6.1"}
+
+- python = "^3.11"
+- uvicorn = {extras = ["standard"], version = "^0.20.0"}
+- fastapi = {extras = ["all"], version = "^0.89.1"}
+- json-log-formatter = "^0.5.1"
+- alembic = "^1.9.2"
+- databases = {extras = ["aiomysql"], version = "^0.7.0"}
 - loguru = "^0.6.0"
 - cryptography = "^38.0.1"
 - bcrypt = "^4.0.0"
-- PyJWT = "^2.5.0"
+- sqlalchemy = "^1.4.46"
+- pyjwt = "^2.6.0"
+- mysqlclient = "^2.1.1"
 
 ## How To Run Locally
 
@@ -43,7 +44,7 @@ Then open a terminal inside the `/docker` folder and run the below command in th
 ```
 After docker containers are up, you can access the application in: http://localhost:8080
 
-Then  exec inside the app container, and go to /app/core/db/migrations - run below command: 
+Then  exec inside the docker app container and activate the venv, and go to /app/core/db/migrations - run below command: 
 ```bash
   alembic upgrade head
 ```
