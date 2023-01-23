@@ -5,17 +5,18 @@ description = "FastAPI Boilerplate"
 authors = ["Shohidul <theshohidul@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-uvicorn = {version = "0.17.6", extras = ["standard"]}
-fastapi = {version = "0.80.0", extras = ["all"]}
-json-log-formatter = "0.4.0" 
-SQLAlchemy = "^1.4.40"
-alembic = "^1.8.1"
-databases = {extras = ["aiomysql"], version = "^0.6.1"}
+python = "^3.11"
+uvicorn = {extras = ["standard"], version = "^0.20.0"}
+fastapi = {extras = ["all"], version = "^0.89.1"}
+json-log-formatter = "^0.5.1"
+alembic = "^1.9.2"
+databases = {extras = ["aiomysql"], version = "^0.7.0"}
 loguru = "^0.6.0"
 cryptography = "^38.0.1"
 bcrypt = "^4.0.0"
-PyJWT = "^2.5.0"
+sqlalchemy = "^1.4.46"
+pyjwt = "^2.6.0"
+mysqlclient = "^2.1.1"
 
 [tool.poetry.dev-dependencies]
 
